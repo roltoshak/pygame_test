@@ -56,14 +56,14 @@ class Bug(pygame.sprite.Sprite):
         self.y = y
         
         self.rect.center = (self.x, self.y)
-            
-        
-            
 
 b = Bug(random.randint(0, 3))
 bugs_list.add(b)
 
-print(b.rect)
+def spawn_bugs():
+    global bugs_list
+    b = Bug(random.randint(0, 3))
+    bugs_list.add(b)
 
 def game_logic(window):
     global bugs_list
@@ -74,9 +74,6 @@ def game_logic(window):
     img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     img = np.rot90(img)
     img = pygame.surfarray.blit_array(window, img)
-
-    
-    pygame.draw.rect(window, (255, 0, 0), b.rect)
 
     bugs_list.update()
     bugs_list.draw(window)
