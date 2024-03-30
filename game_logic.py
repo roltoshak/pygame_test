@@ -23,8 +23,9 @@ class Bug(pygame.sprite.Sprite):
         self.is_rotate = False
         self.x = random.randint(0, w)
         self.y = random.randint(0, h)
-        self.angle = math.radians(random.randint(0, 360))
+        self.angle = random.randint(0, 360)
         self.image = pygame.transform.rotate(consts.bugs[self.id], self.angle)
+        self.angle = math.radians(self.angle)
         self.rect = self.image.get_rect(center = (self.x, self.y))
 
     def rotate(self):
