@@ -43,7 +43,6 @@ class Bug(pygame.sprite.Sprite):
         if self.is_rotate:
             self.rotate()
             return
-        print(math.degrees(self.angle))
         x = self.x + math.cos(self.angle) * 7
         y = self.y - math.sin(self.angle) * 7
         if not self.is_rotate and not zone.collidepoint(x, y):
@@ -64,6 +63,14 @@ def spawn_bugs():
     global bugs_list
     b = Bug(random.randint(0, 3))
     bugs_list.add(b)
+
+def killing_bugs():
+    (x, y) = pygame.mouse.get_pos()
+    for bug in bugs_list:
+        if bug.rect.collidepoint(x, y):
+            bug.kill()
+            return
+
 
 def game_logic(window):
     global bugs_list

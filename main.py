@@ -1,5 +1,5 @@
 import pygame
-from game_logic import game_logic, spawn_bugs
+from game_logic import game_logic, spawn_bugs, killing_bugs
 import consts
 
 pygame.init()
@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 fps = 60
 
 EVspawn_bugs = pygame.USEREVENT + 0
-pygame.time.set_timer(EVspawn_bugs, 1000)
+pygame.time.set_timer(EVspawn_bugs, 3000)
 
 def main_loop():
     while True:
@@ -19,8 +19,10 @@ def main_loop():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 return
-            if event.type == spawn_bugs:
+            elif event.type == EVspawn_bugs:
                 spawn_bugs()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                killing_bugs()
         game_logic(window)
         pygame.display.update()
         clock.tick(fps)
